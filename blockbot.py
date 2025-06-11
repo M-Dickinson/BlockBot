@@ -1,4 +1,5 @@
 from copy import deepcopy
+from itertools import permutations
 
 def convertPiece(piece):
 	root = (-1, -1)
@@ -77,7 +78,6 @@ for i in range(height):
 	for j in range(width):
 		board = deepcopy(saveboard)
 		placed = placePiece(board, piece, (i, j))
-"""
 
 while True:
 	pieces = []
@@ -101,3 +101,27 @@ while True:
 	restart = input("Continue? (y/n): ")
 	if restart == 'n':
 		break
+"""
+pieces = [1, 2, 3]
+i = 0
+j = 0
+ref = [-1]
+final = []
+while i >= 0:
+	j = ref[-1] + 1
+	ref.pop()
+	while j < len(pieces):
+		if j not in ref:
+			ref.append(j)
+			if i < len(pieces) - 1:
+				i += 1
+				j = -1
+			else:
+				final.append(ref.copy())
+				ref.pop()
+		j += 1
+	i -= 1
+
+print(final)
+
+print(list(permutations(pieces, 3)))
